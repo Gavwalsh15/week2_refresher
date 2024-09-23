@@ -1,6 +1,5 @@
 package ie.atu.week2_refresher;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +24,30 @@ public class ProductController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<String> addProduct(@RequestBody Product new_product) {
-        productService.addProduct(new_product);
+    public ResponseEntity<String> addProduct(@RequestBody Product newProduct) {
+        productService.addProduct(newProduct);
         return new ResponseEntity<>("Product successfully created\n", HttpStatus.CREATED);
     }
+
+    @PutMapping("edit/{id}")
+    public ResponseEntity<String> editProduct(@PathVariable long id, @RequestBody Product changedProduct) {
+        boolean status = productService.editProduct(id, changedProduct);
+
+        if(status){
+            return new ResponseEntity<>("Product successfully Edited\n", HttpStatus.CREATED);
+        }else
+            return new ResponseEntity<>("Product not found\n", HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("delete/{id}")
+    public ResponseEntity<String> editProduct(@PathVariable long id) {
+        boolean status = productService.deleteProduct(id);
+
+        if(status){
+            return new ResponseEntity<>("Product successfully Deleted\n", HttpStatus.CREATED);
+        }else
+            return new ResponseEntity<>("Product not found\n", HttpStatus.BAD_REQUEST);
+    }
+
+
 }
