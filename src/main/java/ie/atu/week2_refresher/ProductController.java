@@ -39,7 +39,7 @@ public class ProductController {
             return new ResponseEntity<>("Product not found\n", HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("delete/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<String> editProduct(@PathVariable long id) {
         boolean status = productService.deleteProduct(id);
 
