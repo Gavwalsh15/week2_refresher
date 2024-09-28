@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products/")
 public class ProductController {
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     @GetMapping("get")
     public List<Product> getAllProducts() {
@@ -20,8 +20,8 @@ public class ProductController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<String> addProduct(@RequestBody Product new_product) {
-        products.add(new_product);
-        return new ResponseEntity<>("Product successfully created\n" + new_product, HttpStatus.CREATED);
+    public ResponseEntity<String> addProduct(@RequestBody Product newProduct) {
+        products.add(newProduct);
+        return new ResponseEntity<>("Product successfully created\n" + newProduct, HttpStatus.CREATED);
     }
 }
